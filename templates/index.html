@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Polish Word Declension</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Polish Word Declension</h1>
+        <input id="wordInput" type="text" placeholder="Enter a Polish word">
+        <button id="submitButton" onclick="fetchDeclensionTable()">Submit</button>
+        <div id="resultTable"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
