@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
-CORS(app)   
+CORS(app)
 
 @app.route("/")
 def index():
@@ -25,7 +25,6 @@ def get_declension_table():
 
     # Parse the declension table and return as JSON
     declension_table = []
-    headers = []  # Initialize the row headers list
     for row in rows:
         cells = row.find_all("td")
         if cells:
@@ -35,11 +34,7 @@ def get_declension_table():
             header_cells = row.find_all("th")
             if header_cells:
                 header_row = [cell.text.strip() for cell in header_cells]
-                if not headers:  # Check if headers list is empty
-                    headers = header_row
-                else:
-                    row_data = header_row[1:]  # Exclude the first cell as the row header
-                    declension_table.append(row_data)
+                headers = header_row
 
     # Create a dictionary with headers and values
     result = {

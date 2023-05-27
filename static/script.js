@@ -34,10 +34,9 @@ function fetchDeclensionTable() {
     function displayResult(data) {
       const headers = data.headers.filter(header => header !== ""); // Exclude empty header
       const tableData = data.table;
-    
+      
       let tableHtml = "<table>";
-    
-      // Add column headers
+      // Add table headers
       tableHtml += "<tr>";
       for (const header of headers) {
         tableHtml += `<th>${header}</th>`;
@@ -45,21 +44,11 @@ function fetchDeclensionTable() {
       tableHtml += "</tr>";
     
       // Add table data
-      for (let i = 0; i < tableData.length; i++) {
-        const row = tableData[i];
+      for (const row of tableData) {
         tableHtml += "<tr>";
-    
-        for (let j = 0; j < row.length; j++) {
-          const cell = row[j];
-          
-          // Display the first cell as row header
-          if (j === 0) {
-            tableHtml += `<th>${cell}</th>`;
-          } else {
-            tableHtml += `<td>${cell}</td>`;
-          }
+        for (const cell of row) {
+          tableHtml += `<td>${cell}</td>`;
         }
-    
         tableHtml += "</tr>";
       }
     
@@ -67,4 +56,4 @@ function fetchDeclensionTable() {
     
       resultTable.innerHTML = tableHtml;
     }
-    
+
