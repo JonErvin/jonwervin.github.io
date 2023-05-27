@@ -29,40 +29,40 @@ function fetchDeclensionTable() {
         console.error("Request failed. Check your network connection.");
       };
       xhr.send();
+  }
+    
+function displayResult(data) {
+  const columnHeaders = data.column_headers;
+  const rowHeaders = data.row_headers;
+  const tableData = data.table;
+
+  let tableHtml = "<table>";
+
+  // Add column headers
+  tableHtml += "<tr>";
+  for (const header of columnHeaders) {
+    tableHtml += `<th>${header}</th>`;
+  }
+  tableHtml += "</tr>";
+
+  // Add row headers and table data
+  for (let i = 0; i < tableData.length; i++) {
+    const row = tableData[i];
+    tableHtml += "<tr>";
+
+    // Add row header
+    tableHtml += `<th>${rowHeaders[i]}</th>`;
+
+    // Add table data
+    for (const cell of row) {
+      tableHtml += `<td>${cell}</td>`;
     }
-    
-    function displayResult(data) {
-      const columnHeaders = data.column_headers;
-      const rowHeaders = data.row_headers;
-      const tableData = data.table;
-    
-      let tableHtml = "<table>";
-    
-      // Add column headers
-      tableHtml += "<tr>";
-      for (const header of columnHeaders) {
-        tableHtml += `<th>${header}</th>`;
-      }
-      tableHtml += "</tr>";
-    
-      // Add row headers and table data
-      for (let i = 0; i < tableData.length; i++) {
-        const row = tableData[i];
-        tableHtml += "<tr>";
-    
-        // Add row header
-        tableHtml += `<th>${rowHeaders[i]}</th>`;
-    
-        // Add table data
-        for (const cell of row) {
-          tableHtml += `<td>${cell}</td>`;
-        }
-    
-        tableHtml += "</tr>";
-      }
-    
-      tableHtml += "</table>";
-    
-      resultTable.innerHTML = tableHtml;
-    }
+
+    tableHtml += "</tr>";
+  }
+
+  tableHtml += "</table>";
+
+  resultTable.innerHTML = tableHtml;
+}
 
