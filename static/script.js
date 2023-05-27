@@ -36,16 +36,16 @@ function fetchDeclensionTable() {
       const tableData = data.table;
       
       let tableHtml = "<table>";
-      // Add table headers
-      tableHtml += "<tr>";
-      for (const header of headers) {
-        tableHtml += `<th>${header}</th>`;
-      }
-      tableHtml += "</tr>";
-    
-      // Add table data
+      let isFirstRow = true; // Flag to identify the first row
+
       for (const row of tableData) {
         tableHtml += "<tr>";
+
+        if (isFirstRow) {
+          tableHtml += `<th></th>`;
+          isFirstRow = false; // Set the flag to false after adding the row header
+        }
+
         for (const cell of row) {
           tableHtml += `<td>${cell}</td>`;
         }
