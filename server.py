@@ -25,20 +25,25 @@ def get_declension_table():
 
     # Parse the declension table and return as JSON
     declension_table = []
+    headers = []  # Initialize the headers list
     for row in rows:
-        cells = row.find_all("td")
+        cells = row.find_all(["th", "td"])
         if cells:
-            forms = [cell.text.strip() for cell in cells]
-            declension_table.append(forms)
+            row_data = [cell.text.strip() for cell in cells]
+            declension_table.append(row_data)
         else:
-            header_cells = row.find_all("th")
-            if header_cells:
-                header_row = [cell.text.strip() for cell in header_cells]
-                headers = header_row
+            break  # Stop parsing if no more data rows are found
+
+    # Separate the first row as column headers
+    column_headers = declension_table.pop(0) if declension_table else []
+
+    # Separate the first column as row headers
+    row_headers = [row.pop(0) for row in declension_table]
 
     # Create a dictionary with headers and values
     result = {
-        "headers": headers,
+        "column_headers": column_headers,
+        "row_headers": row_headers,
         "table": declension_table
     }
 

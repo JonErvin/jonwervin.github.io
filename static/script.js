@@ -32,23 +32,32 @@ function fetchDeclensionTable() {
     }
     
     function displayResult(data) {
-      const headers = data.headers.filter(header => header !== ""); // Exclude empty header
+      const columnHeaders = data.column_headers;
+      const rowHeaders = data.row_headers;
       const tableData = data.table;
-      
+    
       let tableHtml = "<table>";
-      // Add table headers
+    
+      // Add column headers
       tableHtml += "<tr>";
-      for (const header of headers) {
+      for (const header of columnHeaders) {
         tableHtml += `<th>${header}</th>`;
       }
       tableHtml += "</tr>";
     
-      // Add table data
-      for (const row of tableData) {
+      // Add row headers and table data
+      for (let i = 0; i < tableData.length; i++) {
+        const row = tableData[i];
         tableHtml += "<tr>";
+    
+        // Add row header
+        tableHtml += `<th>${rowHeaders[i]}</th>`;
+    
+        // Add table data
         for (const cell of row) {
           tableHtml += `<td>${cell}</td>`;
         }
+    
         tableHtml += "</tr>";
       }
     
