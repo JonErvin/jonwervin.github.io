@@ -34,21 +34,32 @@ function fetchDeclensionTable() {
     function displayResult(data) {
       const headers = data.headers.filter(header => header !== ""); // Exclude empty header
       const tableData = data.table;
-      
+    
       let tableHtml = "<table>";
-      let isFirstRow = true; // Flag to identify the first row
-
-      for (const row of tableData) {
+    
+      // Add column headers
+      tableHtml += "<tr>";
+      for (const header of headers) {
+        tableHtml += `<th>${header}</th>`;
+      }
+      tableHtml += "</tr>";
+    
+      // Add table data
+      for (let i = 0; i < tableData.length; i++) {
+        const row = tableData[i];
         tableHtml += "<tr>";
-
-        if (isFirstRow) {
-          tableHtml += `<th></th>`;
-          isFirstRow = false; // Set the flag to false after adding the row header
+    
+        for (let j = 0; j < row.length; j++) {
+          const cell = row[j];
+          
+          // Display the first cell as row header
+          if (j === 0) {
+            tableHtml += `<th>${cell}</th>`;
+          } else {
+            tableHtml += `<td>${cell}</td>`;
+          }
         }
-
-        for (const cell of row) {
-          tableHtml += `<td>${cell}</td>`;
-        }
+    
         tableHtml += "</tr>";
       }
     
@@ -56,4 +67,4 @@ function fetchDeclensionTable() {
     
       resultTable.innerHTML = tableHtml;
     }
-
+    
