@@ -40,9 +40,6 @@ def get_declension_table():
     # Separate the first column as row headers
     row_headers = [row.pop(0) for row in declension_table]
 
-    # Print the resulting declension_table for debugging
-    # print(declension_table)
-
     # Create a dictionary with headers and values
     result = {
         "column_headers": column_headers,
