@@ -32,5 +32,24 @@ button {
 
 #resultTable {
     margin-top: 20px;
-    text-align: left;
+    text-align: center;
+}
+
+#resultTable table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#resultTable th, #resultTable td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+#resultTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+#resultTable td {
+    background-color: #fff;
 }
