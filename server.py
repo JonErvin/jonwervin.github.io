@@ -38,14 +38,7 @@ def get_table_from_page(url):
     # Separate the first column as row headers
     row_headers = [row.pop(0) for row in declension_table]
 
-    # Create a dictionary with headers and values
-    result = {
-        "column_headers": column_headers,
-        "row_headers": row_headers,
-        "table": declension_table
-    }
-
-    return jsonify(result)
+    return declension_table, column_headers, row_headers
 
 @app.route("/get_declension_table")
 def get_declension_table():
@@ -53,7 +46,7 @@ def get_declension_table():
 
     # Fetch the declension table from the current page
     current_url = f"https://en.wiktionary.org/wiki/{word}#Polish"
-    current_headers, current_table = get_table_from_page(current_url)
+    declension_table, column_headers, row_headers = get_table_from_page(current_url)
 
     # If no table on current page, follow the link for the related word
     if not current_table:
@@ -63,11 +56,12 @@ def get_declension_table():
         related_link = soup.find("a", {"title": f"{word}#Polish"})
         if related_link:
             related_url = "https://en.wiktionary.org" + related_link["href"]
-            current_headers, current_table = get_table_from_page(related_url)
+            declension_table, column_headers, row_headers = get_table_from_page(related_url)
 
     result = {
-        "headers": current_headers,
-        "table": current_table
+        "column_headers": column_headers,
+        "row_headers": row_headers,
+        "table": declension_table
     }
 
     return jsonify(result)
