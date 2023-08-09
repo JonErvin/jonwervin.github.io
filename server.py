@@ -11,9 +11,7 @@ CORS(app)
 def index():
     return render_template("index.html")
 
-
-@app.route("/get_declension_table")
-def get_declension_table():
+def get_table_from_page(url):
     word = request.args.get("word")
 
     # Fetch the declension table
@@ -45,6 +43,31 @@ def get_declension_table():
         "column_headers": column_headers,
         "row_headers": row_headers,
         "table": declension_table
+    }
+
+    return jsonify(result)
+
+@app.route("/get_declension_table")
+def get_declension_table():
+    word = request.args.get("word")
+
+    # Fetch the declension table from the current page
+    current_url = f"https://en.wiktionary.org/wiki/{word}#Polish"
+    current_headers, current_table = get_table_from_page(current_url)
+
+    # If no table on current page, follow the link for the related word
+    if not current_table:
+        related_word_url = f"https://en.wiktionary.org/wiki/{word}"
+        response = requests.get(related_word_url)
+        soup = BeautifulSoup(response.content, "html.parser")
+        related_link = soup.find("a", {"title": f"{word}#Polish"})
+        if related_link:
+            related_url = "https://en.wiktionary.org" + related_link["href"]
+            current_headers, current_table = get_table_from_page(related_url)
+
+    result = {
+        "headers": current_headers,
+        "table": current_table
     }
 
     return jsonify(result)
