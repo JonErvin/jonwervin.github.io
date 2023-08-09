@@ -49,7 +49,7 @@ def get_declension_table():
     declension_table, column_headers, row_headers = get_table_from_page(current_url)
 
     # If no table on current page, follow the link for the related word
-    if not current_table:
+    if not declension_table:
         related_word_url = f"https://en.wiktionary.org/wiki/{word}"
         response = requests.get(related_word_url)
         soup = BeautifulSoup(response.content, "html.parser")
