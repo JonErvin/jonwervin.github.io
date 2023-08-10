@@ -55,7 +55,7 @@ function displayResult(data, searchTerm) {
 
     // Add table data
     for (const cell of row) {
-      const highlightedCell = cell.replace(new RegExp(searchTerm, "gi"), match => `<span class="highlight">${match}</span>`);
+      const highlightedCell = cell.replace(new RegExp(`\\b${searchTerm}\\b`, "gi"), match => `<span class="highlight">${match}</span>`);
       tableHtml += `<td>${highlightedCell}</td>`;
     }
 
