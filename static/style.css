@@ -36,6 +36,7 @@ button {
     padding: 12px;
 }
 
+/* Table styles */
 #resultTable {
     margin-top: 20px;
     text-align: center;
@@ -58,4 +59,11 @@ button {
 
 #resultTable td {
     background-color: #fff;
+}
+
+/* Other styles */
+
+.highlight {
+    background-color: rgb(249, 249, 138);
+    font-weight: bold;
 }

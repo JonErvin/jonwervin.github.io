@@ -20,7 +20,7 @@ function fetchDeclensionTable() {
     xhr.onload = function () {
         if (xhr.status === 200) {
           const data = JSON.parse(xhr.responseText);
-          displayResult(data);
+          displayResult(data, word);
         } else {
           console.error("Request failed. Status:", xhr.status);
         }
@@ -31,7 +31,7 @@ function fetchDeclensionTable() {
       xhr.send();
   }
     
-function displayResult(data) {
+function displayResult(data, searchTerm) {
   const columnHeaders = data.column_headers;
   const rowHeaders = data.row_headers;
   const tableData = data.table;
@@ -55,7 +55,8 @@ function displayResult(data) {
 
     // Add table data
     for (const cell of row) {
-      tableHtml += `<td>${cell}</td>`;
+      const highlightedCell = cell.replace(new RegExp(searchTerm, "gi"), match => `<span class="highlight">${match}</span>`);
+      tableHtml += `<td>${highlightedCell}</td>`;
     }
 
     tableHtml += "</tr>";
