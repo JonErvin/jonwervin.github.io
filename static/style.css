@@ -1,29 +1,29 @@
+/* Common styles for all screen sizes */
 .container {
     width: 95vw;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 2.5vw; /* Adjust as needed */
     text-align: center;
     background-color: #f2f2f2;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 1.5vw; /* Adjust as needed */
+    box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.1); /* Adjust as needed */
 }
 
 body {
     font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
-
 h1 {
     color: #333;
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 3vw; /* Adjust as needed */
+    margin-bottom: 2vw; /* Adjust as needed */
 }
 
 input[type="text"], button {
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 10px;
+    padding: 2.5vw; /* Adjust as needed */
+    font-size: 2.5vw; /* Adjust as needed */
+    margin-bottom: 1vw; /* Adjust as needed */
     width: 100%;
     box-sizing: border-box;
 }
@@ -33,12 +33,12 @@ button {
     color: white;
     border: none;
     cursor: pointer;
-    padding: 12px;
+    padding: 3vw; /* Adjust as needed */
 }
 
 /* Table styles */
 #resultTable {
-    margin-top: 20px;
+    margin-top: 2vw; /* Adjust as needed */
     text-align: center;
 }
 
@@ -48,8 +48,8 @@ button {
 }
 
 #resultTable th, #resultTable td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+    padding: 2vw; /* Adjust as needed */
+    border-bottom: 0.1vw solid #ddd; /* Adjust as needed */
 }
 
 #resultTable th {
@@ -66,4 +66,37 @@ button {
 .highlight {
     background-color: rgb(249, 249, 138);
     font-weight: bold;
+}
+
+/* Media query for desktop screens */
+@media (min-width: 768px) {
+    .container {
+        padding: 2vw; /* Adjust as needed */
+        border-radius: 1vw; /* Adjust as needed */
+        box-shadow: 0 0.25vw 0.5vw rgba(0, 0, 0, 0.1); /* Adjust as needed */
+    }
+
+    h1 {
+        font-size: 1.5vw; /* Adjust as needed */
+        margin-bottom: 1.5vw; /* Adjust as needed */
+    }
+
+    input[type="text"], button {
+        padding: 1.5vw; /* Adjust as needed */
+        font-size: 1.5vw; /* Adjust as needed */
+        margin-bottom: 1vw; /* Adjust as needed */
+    }
+
+    button {
+        padding: 2vw; /* Adjust as needed */
+    }
+
+    #resultTable {
+        margin-top: 1.5vw; /* Adjust as needed */
+    }
+
+    #resultTable th, #resultTable td {
+        padding: 1.5vw; /* Adjust as needed */
+        border-bottom: 0.05vw solid #ddd; /* Adjust as needed */
+    }
 }
