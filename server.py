@@ -15,24 +15,26 @@ def get_table_from_page(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
     table = soup.find("table", {"class": "inflection-table"})
-    rows = table.find_all("tr")
+    
 
     # Parse the declension table and return as JSON
     declension_table = []
     headers = []  # Initialize the headers list
-    for row in rows:
-        cells = row.find_all(["th", "td"])
-        if cells:
-            row_data = [cell.text.strip() for cell in cells]
-            declension_table.append(row_data)
-        else:
-            break  # Stop parsing if no more data rows are found
+    if table:
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = row.find_all(["th", "td"])
+            if cells:
+                row_data = [cell.text.strip() for cell in cells]
+                declension_table.append(row_data)
+            else:
+                break  # Stop parsing if no more data rows are found
 
     # Separate the first row as column headers
     column_headers = declension_table.pop(0) if declension_table else []
 
     # Separate the first column as row headers
-    row_headers = [row.pop(0) for row in declension_table]
+    row_headers = [row.pop(0) for row in declension_table] if declension_table else []
 
     return declension_table, column_headers, row_headers
 
