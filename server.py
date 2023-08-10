@@ -53,7 +53,7 @@ def get_declension_table():
         related_word_url = f"https://en.wiktionary.org/wiki/{word}"
         response = requests.get(related_word_url)
         soup = BeautifulSoup(response.content, "html.parser")
-        related_link = soup.find("a", {"title": f"{word}#Polish"})
+        related_link = soup.select_one('a[href*="/wiki"][href$="#Polish"]') # Updated 8/9/23
         if related_link:
             related_url = "https://en.wiktionary.org" + related_link["href"]
             declension_table, column_headers, row_headers = get_table_from_page(related_url)
