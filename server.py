@@ -12,10 +12,6 @@ def index():
     return render_template("index.html")
 
 def get_table_from_page(url):
-    word = request.args.get("word")
-
-    # Fetch the declension table
-    url = f"https://en.wiktionary.org/wiki/{word}#Polish"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
     table = soup.find("table", {"class": "inflection-table"})
